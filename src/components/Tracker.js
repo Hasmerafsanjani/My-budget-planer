@@ -7,10 +7,11 @@ const Tracker = () => {
     amount: '',
   });
 
-  const [budget, setBudget] = useState(10000);
+  const [budget, setBudget] = useState(null);
   const [spent, setSpent] = useState(0);
   const [remaining, setRemaining] = useState(budget);
   const [submittedData, setSubmittedData] = useState([]);
+  const [isbudget,setIsbudget]= useState(true)
 
 
 
@@ -30,7 +31,7 @@ const Tracker = () => {
   const handleBudgetChange = (event) => {
     const newBudget = parseFloat(event.target.value);
     setBudget(newBudget);
-    setRemaining(newBudget - spent - parseFloat(formData.amount));
+    setRemaining(newBudget - spent - formData.amount);
   };
 
 
@@ -39,6 +40,7 @@ const Tracker = () => {
     if(spent>budget){
       alert("your budget is failed")
     }
+
     const expenseAmount = parseFloat(formData.amount);
 
     // Calculate spent and remaining dynamically
@@ -57,10 +59,29 @@ const Tracker = () => {
   };
 
   return (
-    <>
+
     <div>
+        <h2 className='text-4xl font-bold text-center p-1 m-6' > My Budget Tracker</h2>
+      { isbudget ? (<div className='flex flex-col justify-center items-center'>
+
+
+
+      <label className='text-3xl font-bold p-3' htmlFor='budget'>Set Total Budget:</label>
+      <input
+       placeholder='Enter your Budget'
+        type='number'
+        id='budget'
+        name='budget'
+        className='border-2 p-2 focus:border-blue-500 outline-none w-[40vw] bg-gray-100 rounded-lg'
+        value={budget}
+        onChange={handleBudgetChange}
+        required
+      />
+      <button onClick={()=>setIsbudget(false)}  className='bg-green-600 p-2 px-4 rounded-lg md:ml-20 sm:ml-10 w-[20vw] m-3 text-white font-bold text-lg'  >SetBudget</button>
+    </div> 
+    ) : (
     <div>
-      <h2 className='text-4xl font-bold text-center p-1 m-6' > My Budget Tracker</h2>
+    
       <div className='flex justify-evenly ' >
       <div className='p-2 rounded m-4  bg-green-300 text-2xl font-semibold'>Budget : {budget}</div>
       <div className='p-2 rounded m-4  bg-blue-300 text-2xl font-semibold'>Remaining : {remaining} </div>
@@ -117,8 +138,10 @@ const Tracker = () => {
         </ul>
       </div>
     </div>
+      )
+          }
     </div>
-    </>
+
   );
 };
 
