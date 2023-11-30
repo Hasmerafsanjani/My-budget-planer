@@ -123,14 +123,25 @@ const Tracker = () => {
       <div>
       <h1 className=' p-4  font-semibold text-3xl md:ml-20 sm:ml-10'>All Expences....</h1>
         <ul className='flex flex-col font-bold gap-3'>
-          {submittedData.map((data, index) => (
-            <li key={index} className='flex justify-evenly '>
-               <div className='border-2 p-2 focus:border-blue-500 outline-none w-[40vw] bg-gray-100 rounded-lg'>
+
+        <li  className='flex justify-evenly '>
+               <div className='border-2 p-2 focus:border-blue-500 outline-none w-[40vw] text-red-700 bg-red-200 rounded-lg'>
                 <li>Expense: </li>
+        
+               </div >
+               <div className='border-2 p-2 focus:border-blue-500 outline-none w-[40vw] bg-blue-200 rounded-lg'>
+                <li>Value: </li>
+               </div>
+            </li>
+
+          {submittedData.map((data, index) => (
+            <li key={index} className='flex justify-evenly  font-normal'>
+               <div className='border-2 p-2 focus:border-blue-500 outline-none w-[40vw] bg-gray-100 rounded-lg'>
+         
                 <li> {data.Expense}</li>
                </div >
                <div className='border-2 p-2 focus:border-blue-500 outline-none w-[40vw] bg-gray-100 rounded-lg'>
-                <li>Value: </li>
+          
                 <li> {data.amount}</li>
                </div>
             </li>
